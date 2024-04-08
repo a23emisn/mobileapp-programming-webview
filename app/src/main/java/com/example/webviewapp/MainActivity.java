@@ -3,7 +3,7 @@ package com.example.webviewapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MenuItem;import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     private WebView myWebView;
+    private WebSettings webSettings;
 
     public void showExternalWebPage(){
         // TODO: Add your code for showing external web page here
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         myWebView = (WebView) findViewById(R.id.my_webview);
         myWebView.setWebViewClient(new WebViewClient());
+        webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("https://his.se");
 
         /*
         * Rename your App. Tip: Values->Strings
