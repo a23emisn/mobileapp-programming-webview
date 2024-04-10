@@ -1,42 +1,83 @@
 
 # Rapport
 
-**Skriv din rapport här!**
-
-_Du kan ta bort all text som finns sedan tidigare_.
-
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
-
+Följande är gjort i denna uppgift, programkod följer efter.
+1. Bytte namn på applikationen i res/values/strings.xml.
+2. Applikationen gavs åtkomst till internet i AndroidManifest.xml.
+3. I activity_main.xml togs textview elementet bort och ett webview
+element lades till med ett nytt id "my_webview".
+4. I MainActivity.java importerades nödvändiga klasser och deklarerade privata 
+klassvariabler för webview elementet och websettings.
+I samma fil så instantieras myWebView i "onCreate()" metoden och associeras med 
+xml elementet via findViewById()-metoden. En ny webview client skapades och Javascript 
+exekvering aktiverades.
+5. I metoden "onOptionsItemSelected()" lades metodanrop till för metoder som skall
+exekveras när dropdown-menyn används.
+6. Ett simpelt html dokument lades till i app/src/main/assets/internalpage.html.
+7. I metoden som anropas lades "myWebView.loadUrl()" för att dirigera användaren 
+till önskad sida.
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
-    }
+1. 
+<string name="app_name">Emils app</string>
+
+2.
+<uses-permission android:name="android.permission.INTERNET" />
+
+3.
+<WebView
+       android:id="@+id/my_webview"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent" />"
+
+3.
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+private WebView myWebView;
+private WebSettings webSettings;
+ 
+4. 
+myWebView = (WebView) findViewById(R.id.my_webview);
+myWebView.setWebViewClient(new WebViewClient());
+webSettings = myWebView.getSettings();
+webSettings.setJavaScriptEnabled(true);
+ 
+5.
+if (id == R.id.action_external_web) {
+        showExternalWebPage();
+        return true;
 }
+
+if (id == R.id.action_internal_web) {
+       showInternalWebPage();
+       return true;
+}"
+ 
+6. 
+<!DOCTYPE html>
+<html>
+<body>
+<br>
+<br>
+<h1>This is the internal webpage</h1>
+<p>It works!</p>
+
+</body>
+</html>
+
+7. 
+public void showExternalWebPage(){
+        myWebView.loadUrl("https://his.se");
+}
+
+public void showInternalWebPage(){
+       myWebView.loadUrl("///android_asset/internalpage.html");
+}
+  
+  
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
 
 ![](android.png)
 
-Läs gärna:
-
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.

@@ -3,7 +3,8 @@ package com.example.webviewapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;import android.webkit.WebSettings;
+import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -15,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private WebView myWebView;
     private WebSettings webSettings;
 
-    public void showExternalWebPage(){myWebView.loadUrl("https://his.se");
+    public void showExternalWebPage(){
+        myWebView.loadUrl("https://his.se");
     }
 
     public void showInternalWebPage(){
