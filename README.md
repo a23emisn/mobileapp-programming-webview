@@ -78,6 +78,5 @@ public void showInternalWebPage(){
   
 ```
 
-
-![](android.png)
-
+![](Screenshot_20240408_203733.png)
+![](Screenshot_20240408_203733.png)
